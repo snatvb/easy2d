@@ -1,3 +1,6 @@
 [submodule "external/SDL"]
 	path = external/SDL
 	url = git@github.com:libsdl-org/SDL.git
+[submodule "external/entt"]
+	path = external/entt
+	url = git@github.com:skypjack/entt.git
