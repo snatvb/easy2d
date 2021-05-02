@@ -23,9 +23,15 @@ file(GLOB DEBUG_SRC
     include/${ENGINE_NAME}/Debug/*.hpp
 )
 
+file(GLOB OWN_LIB_SRC
+    src/${ENGINE_NAME}/lib/*.cpp
+    include/${ENGINE_NAME}/lib/*.hpp
+)
+
 add_library(${ENGINE_NAME} STATIC
     ${CORE_SRC}
     ${DEBUG_SRC}
+    ${OWN_LIB_SRC}
 )
 
 target_include_directories(${ENGINE_NAME} PUBLIC include)

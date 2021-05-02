@@ -1,9 +1,11 @@
 #include <string>
 #include <filesystem>
-#include <easy2d/Core/Engine.hpp>
-#include <entt/entt.hpp>
 #include <SDL_image.h>
+#include <entt/entt.hpp>
+#include <easy2d/Core/Engine.hpp>
 #include <easy2d/Debug/Log.hpp>
+#include <easy2d/Core/World.hpp>
+#include <easy2d/Core/System.hpp>
 
 namespace fs = std::filesystem;
 
@@ -110,7 +112,7 @@ namespace easy2d
         log("Create game loop.");
 
         Uint32 frameStart = SDL_GetTicks();
-        int frameTime;
+        int frameTime = 0;
 
         while (true)
         {
@@ -126,7 +128,10 @@ namespace easy2d
             frameStart = SDL_GetTicks();
 
             SDL_RenderClear(_renderer);
+
             update(registry);
+            _activeWorld->update();
+
             SDL_RenderPresent(_renderer);
 
             frameTime = SDL_GetTicks() - frameStart;
@@ -139,10 +144,18 @@ namespace easy2d
     }
 
     // ----------------------------------------------------------------------------------------
-    void Engine::skipIntro()
+    Engine &Engine::skipIntro()
     {
         _needPlayIntro = false;
+        return *this;
     }
+
+    // ----------------------------------------------------------------------------------------
+    Engine &Engine::setWorld(std::unique_ptr<World> world)
+    {
+        _activeWorld = std::move(world);
+        return *this;
+    };
 
     // ----------------------------------------------------------------------------------------
     void Engine::_playIntro()

@@ -1,4 +1,8 @@
 #pragma once
+#include <memory>
+#include <easy2d/Core/System.hpp>
+#include <easy2d/Core/World.hpp>
+#include <easy2d/lib/vec.hpp>
 
 class SDL_Window;
 class SDL_Renderer;
@@ -6,6 +10,7 @@ class SDL_Renderer;
 namespace easy2d
 {
     class Engine;
+    class World;
 
     Engine &getEngine();
 
@@ -13,7 +18,9 @@ namespace easy2d
     {
     public:
         void initialize();
-        void skipIntro();
+        Engine &skipIntro();
+        Engine &setWorld(std::unique_ptr<World> world);
+        Engine &run();
 
     private:
         // needs dynamic for fps controll
@@ -22,9 +29,11 @@ namespace easy2d
 
         SDL_Window *_window = nullptr;
         SDL_Renderer *_renderer = nullptr;
-        
+
         bool _initialized = false;
         bool _needPlayIntro = true;
+
+        std::unique_ptr<World> _activeWorld;
 
         Engine() = default;
 
