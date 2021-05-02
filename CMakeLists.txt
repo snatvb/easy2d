@@ -13,10 +13,19 @@ option(ENGINE_RES_OUTPUT $<TARGET_FILE_DIR:${RUNTIME_OUTPUT_DIRECTORY}>)
 
 set(DEPS_DIRNAME external)
 
-add_library(${ENGINE_NAME} STATIC
-    src/${ENGINE_NAME}/Core/Engine.cpp
+file(GLOB CORE_SRC
+    src/${ENGINE_NAME}/Core/*.cpp
+    include/${ENGINE_NAME}/Core/*.hpp
+)
 
-    include/${ENGINE_NAME}/Core/Engine.hpp
+file(GLOB DEBUG_SRC
+    src/${ENGINE_NAME}/Debug/*.cpp
+    include/${ENGINE_NAME}/Debug/*.hpp
+)
+
+add_library(${ENGINE_NAME} STATIC
+    ${CORE_SRC}
+    ${DEBUG_SRC}
 )
 
 target_include_directories(${ENGINE_NAME} PUBLIC include)
