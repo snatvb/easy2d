@@ -1,5 +1,7 @@
 #pragma once
 
+class SDL_Window;
+
 namespace easy2d
 {
     class Engine;
@@ -14,6 +16,7 @@ namespace easy2d
     private:
         Engine() = default;
         friend Engine &getEngine();
+        SDL_Window *_window;
     };
 
 } // -- easy2d

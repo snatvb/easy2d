@@ -1,6 +1,9 @@
 #include "easy2d/Core/Engine.hpp"
-#include <SDL.h>
 #include <entt/entt.hpp>
+#include <SDL_config_winrt.h>
+#include <SDL_image.h>
+
+SDL_Texture *logoTexture;
 
 struct position
 {
@@ -50,12 +53,17 @@ namespace easy2d
     void Engine::initialize()
     {
         SDL_Init(SDL_INIT_EVERYTHING);
-        SDL_Window *window = SDL_CreateWindow("easy2d", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
-        SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
+        _window = SDL_CreateWindow("easy2d", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+        SDL_Renderer *renderer = SDL_CreateRenderer(_window, -1, 0);
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
+        SDL_Surface *logoSurface = IMG_Load("easy2d/resources/logo.png");
+        logoTexture = SDL_CreateTextureFromSurface(renderer, logoSurface);
+        SDL_FreeSurface(logoSurface);
+
         SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, logoTexture, NULL, NULL);
         SDL_RenderPresent(renderer);
 
         entt::registry registry;
