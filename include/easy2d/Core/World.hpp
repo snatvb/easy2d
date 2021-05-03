@@ -26,7 +26,8 @@ namespace easy2d
     private:
         vec<std::unique_ptr<BaseSystem>> _systems{};
 
-        void update();
+        void _initialize();
+        void _update();
 
         friend class Engine;
     };

@@ -4,11 +4,19 @@
 
 namespace easy2d
 {
-    void World::update()
+    void World::_update()
     {
         for (auto &system : _systems)
         {
             system->execute();
+        }
+    };
+
+    void World::_initialize()
+    {
+        for (auto &system : _systems)
+        {
+            system->initialize();
         }
     };
 } // -- easy2d

@@ -130,7 +130,7 @@ namespace easy2d
             SDL_RenderClear(_renderer);
 
             update(registry);
-            _activeWorld->update();
+            _activeWorld->_update();
 
             SDL_RenderPresent(_renderer);
 
