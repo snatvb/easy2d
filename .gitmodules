@@ -7,3 +7,6 @@
 [submodule "external/SDL_image"]
 	path = external/SDL_image
 	url = git@github.com:libsdl-org/SDL_image.git
+[submodule "external/sole"]
+	path = external/sole
+	url = git@github.com:r-lyeh-archived/sole.git

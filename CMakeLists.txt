@@ -28,13 +28,20 @@ file(GLOB OWN_LIB_SRC
     include/${ENGINE_NAME}/lib/*.hpp
 )
 
+file(GLOB EXTERNALS_SRC
+    ${DEPS_DIRNAME}/sole/sole.cpp
+    ${DEPS_DIRNAME}/sole/sole.hpp
+)
+
 add_library(${ENGINE_NAME} STATIC
+    ${EXTERNALS_SRC}
     ${CORE_SRC}
     ${DEBUG_SRC}
     ${OWN_LIB_SRC}
 )
 
 target_include_directories(${ENGINE_NAME} PUBLIC include)
+target_include_directories(${ENGINE_NAME} PRIVATE ${DEPS_DIRNAME}/sole)
 target_compile_features(${ENGINE_NAME} PUBLIC cxx_std_17)
 
 add_subdirectory(${DEPS_DIRNAME}/SDL ${CMAKE_CURRENT_BINARY_DIR}/SDL2)

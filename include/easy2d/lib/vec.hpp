@@ -3,6 +3,6 @@
 
 namespace easy2d
 {
-    template <class T>
+    template <typename T>
     using vec = std::vector<T>;
 } // -- easy2d

@@ -2,6 +2,7 @@
 #include <memory>
 #include <entt/entt.hpp>
 #include <easy2d/lib/vec.hpp>
+#include <easy2d/Core/UUID.hpp>
 
 namespace easy2d
 {
@@ -12,6 +13,10 @@ namespace easy2d
     {
     public:
         entt::registry registry;
+
+        World() : _id(UUID::generate()) {}
+
+        const UUID &id() const { return _id; }
 
         template <typename T, typename... TArgs>
         World &registerSystem(TArgs &&...args)
@@ -24,6 +29,7 @@ namespace easy2d
         }
 
     private:
+        const UUID _id;
         vec<std::unique_ptr<BaseSystem>> _systems{};
 
         void _initialize();

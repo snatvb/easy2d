@@ -144,6 +144,13 @@ namespace easy2d
     }
 
     // ----------------------------------------------------------------------------------------
+    Engine &Engine::addWorld(std::unique_ptr<World> world)
+    {
+        _worlds.emplace(world->id(), std::move(world));
+        return *this;
+    }
+
+    // ----------------------------------------------------------------------------------------
     Engine &Engine::skipIntro()
     {
         _needPlayIntro = false;
@@ -151,9 +158,9 @@ namespace easy2d
     }
 
     // ----------------------------------------------------------------------------------------
-    Engine &Engine::setWorld(std::unique_ptr<World> world)
+    Engine &Engine::setActiveWorld(const UUID &uuid)
     {
-        _activeWorld = std::move(world);
+        // _activeWorld = std::move(world);
         return *this;
     };
 
