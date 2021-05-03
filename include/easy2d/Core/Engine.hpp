@@ -18,6 +18,12 @@ namespace easy2d
     class Engine
     {
     public:
+        // no copy
+        Engine(const Engine &) = delete;
+        Engine(Engine &&) = delete;
+        Engine &operator=(const Engine &) = delete;
+        Engine &operator=(Engine &&) = delete;
+
         void initialize();
 
         Engine &addWorld(std::unique_ptr<World> world);
@@ -36,10 +42,10 @@ namespace easy2d
         bool _initialized = false;
         bool _needPlayIntro = true;
 
-        std::unique_ptr<World> _activeWorld;
+        World *_activeWorld;
         map<UUID, std::unique_ptr<World>> _worlds{};
 
-        Engine() = default;
+        explicit Engine() = default;
 
         void _playIntro();
 

@@ -160,7 +160,22 @@ namespace easy2d
     // ----------------------------------------------------------------------------------------
     Engine &Engine::setActiveWorld(const UUID &uuid)
     {
-        // _activeWorld = std::move(world);
+        log("Set World " + uuid.toString() + " as active.");
+        if (_activeWorld->id() == uuid)
+        {
+            log("World " + uuid.toString() + " already is active");
+            return *this;
+        }
+
+        if (_worlds.find(uuid) == _worlds.end())
+        {
+            _activeWorld = _worlds[uuid].get();
+        }
+        else
+        {
+            log("Can't find world " + uuid.toString() + " to install as active.");
+        }
+
         return *this;
     };
 

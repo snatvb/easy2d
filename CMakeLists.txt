@@ -41,7 +41,7 @@ add_library(${ENGINE_NAME} STATIC
 )
 
 target_include_directories(${ENGINE_NAME} PUBLIC include)
-target_include_directories(${ENGINE_NAME} PRIVATE ${DEPS_DIRNAME}/sole)
+target_include_directories(${ENGINE_NAME} PUBLIC ${DEPS_DIRNAME}/sole)
 target_compile_features(${ENGINE_NAME} PUBLIC cxx_std_17)
 
 add_subdirectory(${DEPS_DIRNAME}/SDL ${CMAKE_CURRENT_BINARY_DIR}/SDL2)
