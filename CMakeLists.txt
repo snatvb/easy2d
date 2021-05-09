@@ -23,6 +23,11 @@ file(GLOB DEBUG_SRC
     include/${ENGINE_NAME}/Debug/*.hpp
 )
 
+file(GLOB RENDERER_SRC
+    src/${ENGINE_NAME}/Renderer/*.cpp
+    include/${ENGINE_NAME}/Renderer/*.hpp
+)
+
 file(GLOB OWN_LIB_SRC
     src/${ENGINE_NAME}/lib/*.cpp
     include/${ENGINE_NAME}/lib/*.hpp
@@ -36,6 +41,7 @@ file(GLOB EXTERNALS_SRC
 add_library(${ENGINE_NAME} STATIC
     ${EXTERNALS_SRC}
     ${CORE_SRC}
+    ${RENDERER_SRC}
     ${DEBUG_SRC}
     ${OWN_LIB_SRC}
 )
@@ -52,6 +58,8 @@ add_subdirectory(${DEPS_DIRNAME}/entt ${CMAKE_CURRENT_BINARY_DIR}/entt)
 target_link_libraries(${ENGINE_NAME} PUBLIC EnTT)
 
 add_subdirectory(${DEPS_DIRNAME}/spdlog ${CMAKE_CURRENT_BINARY_DIR}/spdlog)
+# message("LOOKHERE ->" ${CMAKE_CURRENT_SOURCE_DIR}/${DEPS_DIRNAME}/spdlog/include)
+target_include_directories(${ENGINE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${DEPS_DIRNAME}/spdlog/include)
 target_link_libraries(${ENGINE_NAME} PRIVATE spdlog)
 
 target_compile_features(${ENGINE_NAME} PUBLIC cxx_std_17)

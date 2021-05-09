@@ -6,7 +6,7 @@ namespace easy2d
 {
     void World::_update()
     {
-        for (auto &system : _systems)
+        for (auto const &system : _systems)
         {
             system->execute();
         }

@@ -1,5 +1,7 @@
 #pragma once
 #include <memory>
+#include <easy2d/Debug/Log.hpp>
+#include <easy2d/Core/AssetsLoader.hpp>
 #include <easy2d/Core/System.hpp>
 #include <easy2d/Core/World.hpp>
 #include <easy2d/Core/UUID.hpp>
@@ -12,6 +14,7 @@ namespace easy2d
 {
     class Engine;
     class World;
+    class AssetsLoader;
 
     Engine &getEngine();
 
@@ -31,6 +34,10 @@ namespace easy2d
         Engine &setActiveWorld(const UUID &uuid);
         Engine &run();
 
+        SDL_Window *window() { return _window; }
+        SDL_Renderer *renderer() { return _renderer; }
+        AssetsLoader &loader() { return _loader; }
+
     private:
         // needs dynamic for fps controll
         int _frameRate = 300;
@@ -38,6 +45,7 @@ namespace easy2d
 
         SDL_Window *_window = nullptr;
         SDL_Renderer *_renderer = nullptr;
+        AssetsLoader _loader;
 
         bool _initialized = false;
         bool _needPlayIntro = true;

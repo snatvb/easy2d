@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <entt/entt.hpp>
+#include <easy2d/Debug/Log.hpp>
 #include <easy2d/lib/vec.hpp>
 #include <easy2d/Core/UUID.hpp>
 
@@ -22,7 +23,7 @@ namespace easy2d
         World &registerSystem(TArgs &&...args)
         {
             T *system = new T(std::forward<TArgs>(args)...);
-            system->_world = this;
+            system->world = this;
             auto ptr = std::unique_ptr<BaseSystem>(system);
             _systems.emplace_back(std::move(ptr));
             return *this;

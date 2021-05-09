@@ -7,14 +7,11 @@ namespace easy2d
     class BaseSystem
     {
     public:
+        World *world = nullptr;
+
         BaseSystem() = default;
         virtual void initialize(){};
         virtual void execute() = 0;
-
-    private:
-        World *_world = nullptr;
-
-        friend class World;
     };
 
     template <typename Impl>

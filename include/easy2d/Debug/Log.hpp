@@ -8,12 +8,12 @@ namespace easy2d
 #define CRIT(...) spdlog::critical(__VA_ARGS__)
 
 #ifdef NDEBUG
-#define LOG(...) spdlog::log(__VA_ARGS__)
-#define DEBUG(...) spdlog::debug(__VA_ARGS__)
-#define ERROR(...) spdlog::error(__VA_ARGS__)
-#else
-#define LOG(...)
 #define DEBUG(...)
-#define ERROR(...)
+#define ERR(...)
+#define WARN(...)
+#else
+#define DEBUG(...) spdlog::info(__VA_ARGS__)
+#define ERR(...) spdlog::error(__VA_ARGS__)
+#define WARN(...) spdlog::warn(__VA_ARGS__)
 #endif
 } // -- easy2d

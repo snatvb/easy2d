@@ -6,10 +6,9 @@
 #include <easy2d/Debug/Log.hpp>
 #include <easy2d/Core/World.hpp>
 #include <easy2d/Core/System.hpp>
+#include <easy2d/Core/AssetsLoader.hpp>
 
 namespace fs = std::filesystem;
-
-SDL_Texture *logoTexture;
 
 struct position
 {
@@ -59,18 +58,18 @@ namespace easy2d
     // ----------------------------------------------------------------------------------------
     void Engine::initialize()
     {
-        DEBUG("Engine initialization...");
+        INFO("Engine initialization...");
         DEBUG("Path of runner: " + fs::current_path().string());
 
         if (_initialized)
         {
-            DEBUG("Engine Easy2D already initialized!");
+            CRIT("Engine Easy2D already initialized!");
             return;
         }
 
         if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         {
-            DEBUG("SDL initialize has error...");
+            CRIT("SDL initialize has error...");
             return;
         }
         DEBUG("SDL initialied");
@@ -79,7 +78,7 @@ namespace easy2d
         _window = SDL_CreateWindow("easy2d", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
         if (!_window)
         {
-            DEBUG("Window creating has error...");
+            CRIT("Window creating has error...");
             return;
         }
         DEBUG("Window created.");
@@ -88,7 +87,7 @@ namespace easy2d
         _renderer = SDL_CreateRenderer(_window, -1, 0);
         if (!_renderer)
         {
-            DEBUG("Renderer creating has error...");
+            CRIT("Renderer creating has error...");
             return;
         }
         DEBUG("Renderer created.");
@@ -161,19 +160,19 @@ namespace easy2d
     Engine &Engine::setActiveWorld(const UUID &uuid)
     {
         DEBUG("Set World " + uuid.toString() + " as active.");
-        if (_activeWorld->id() == uuid)
+        if (_activeWorld != nullptr && _activeWorld->id() == uuid)
         {
-            DEBUG("World " + uuid.toString() + " already is active");
+            WARN("World " + uuid.toString() + " already is active");
             return *this;
         }
 
-        if (_worlds.find(uuid) == _worlds.end())
+        if (_worlds.find(uuid) != _worlds.end())
         {
             _activeWorld = _worlds[uuid].get();
         }
         else
         {
-            DEBUG("Can't find world " + uuid.toString() + " to install as active.");
+            ERR("Can't find world " + uuid.toString() + " to install as active.");
         }
 
         return *this;
@@ -190,20 +189,7 @@ namespace easy2d
 
         const int fps = 60;
 
-        DEBUG("Create logo surface");
-        SDL_Surface *logoSurface = IMG_Load("easy2d/resources/logo.png");
-        DEBUG("Create texture from the surface");
-        if (logoSurface)
-        {
-            DEBUG("Surface is ok");
-        }
-        else
-        {
-            DEBUG("Surface is incorrect");
-            printf("IMG_Load: %s\n", IMG_GetError());
-        }
-        logoTexture = SDL_CreateTextureFromSurface(_renderer, logoSurface);
-        SDL_FreeSurface(logoSurface);
+        SDL_Texture *logoTexture = _loader.loadTexture("logo", "easy2d/resources/logo.png");
         SDL_SetTextureBlendMode(logoTexture, SDL_BLENDMODE_BLEND);
 
         Uint32 frameStart;
@@ -226,7 +212,6 @@ namespace easy2d
             SDL_RenderClear(_renderer);
 
             int nextAlpha = alpha - 10 * frameTime;
-            DEBUG(std::to_string(nextAlpha));
             alpha = nextAlpha < 0 ? 0 : nextAlpha;
 
             SDL_SetTextureAlphaMod(logoTexture, alpha);
