@@ -59,39 +59,39 @@ namespace easy2d
     // ----------------------------------------------------------------------------------------
     void Engine::initialize()
     {
-        log("Engine initialization...");
-        log("Path of runner: " + fs::current_path().string());
+        DEBUG("Engine initialization...");
+        DEBUG("Path of runner: " + fs::current_path().string());
 
         if (_initialized)
         {
-            log("Engine Easy2D already initialized!");
+            DEBUG("Engine Easy2D already initialized!");
             return;
         }
 
         if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
         {
-            log("SDL initialize has error...");
+            DEBUG("SDL initialize has error...");
             return;
         }
-        log("SDL initialied");
+        DEBUG("SDL initialied");
 
-        log("Creating window...");
+        DEBUG("Creating window...");
         _window = SDL_CreateWindow("easy2d", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
         if (!_window)
         {
-            log("Window creating has error...");
+            DEBUG("Window creating has error...");
             return;
         }
-        log("Window created.");
+        DEBUG("Window created.");
 
-        log("Create renderer...");
+        DEBUG("Create renderer...");
         _renderer = SDL_CreateRenderer(_window, -1, 0);
         if (!_renderer)
         {
-            log("Renderer creating has error...");
+            DEBUG("Renderer creating has error...");
             return;
         }
-        log("Renderer created.");
+        DEBUG("Renderer created.");
 
         SDL_SetRenderDrawColor(_renderer, 0, 0, 0, 255);
         _playIntro();
@@ -108,8 +108,8 @@ namespace easy2d
             }
         }
 
-        log("Initialization success.");
-        log("Create game loop.");
+        DEBUG("Initialization success.");
+        DEBUG("Create game loop.");
 
         Uint32 frameStart = SDL_GetTicks();
         int frameTime = 0;
@@ -160,10 +160,10 @@ namespace easy2d
     // ----------------------------------------------------------------------------------------
     Engine &Engine::setActiveWorld(const UUID &uuid)
     {
-        log("Set World " + uuid.toString() + " as active.");
+        DEBUG("Set World " + uuid.toString() + " as active.");
         if (_activeWorld->id() == uuid)
         {
-            log("World " + uuid.toString() + " already is active");
+            DEBUG("World " + uuid.toString() + " already is active");
             return *this;
         }
 
@@ -173,7 +173,7 @@ namespace easy2d
         }
         else
         {
-            log("Can't find world " + uuid.toString() + " to install as active.");
+            DEBUG("Can't find world " + uuid.toString() + " to install as active.");
         }
 
         return *this;
@@ -190,16 +190,16 @@ namespace easy2d
 
         const int fps = 60;
 
-        log("Create logo surface");
+        DEBUG("Create logo surface");
         SDL_Surface *logoSurface = IMG_Load("easy2d/resources/logo.png");
-        log("Create texture from the surface");
+        DEBUG("Create texture from the surface");
         if (logoSurface)
         {
-            log("Surface is ok");
+            DEBUG("Surface is ok");
         }
         else
         {
-            log("Surface is incorrect");
+            DEBUG("Surface is incorrect");
             printf("IMG_Load: %s\n", IMG_GetError());
         }
         logoTexture = SDL_CreateTextureFromSurface(_renderer, logoSurface);
@@ -226,7 +226,7 @@ namespace easy2d
             SDL_RenderClear(_renderer);
 
             int nextAlpha = alpha - 10 * frameTime;
-            log(std::to_string(nextAlpha));
+            DEBUG(std::to_string(nextAlpha));
             alpha = nextAlpha < 0 ? 0 : nextAlpha;
 
             SDL_SetTextureAlphaMod(logoTexture, alpha);
@@ -249,6 +249,6 @@ namespace easy2d
             }
         }
 
-        log("Intro ended.");
+        DEBUG("Intro ended.");
     }
 }
