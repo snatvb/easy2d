@@ -35,7 +35,7 @@ namespace easy2d
         Engine &run();
 
         SDL_Window *window() { return _window; }
-        SDL_Renderer *renderer() { return _renderer; }
+        SDL_Renderer &renderer() { return *_renderer; }
         AssetsLoader &loader() { return _loader; }
 
     private:

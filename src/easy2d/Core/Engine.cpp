@@ -107,6 +107,9 @@ namespace easy2d
             }
         }
 
+        DEBUG("Active World initializing...");
+        _activeWorld->_initialize();
+
         DEBUG("Initialization success.");
         DEBUG("Create game loop.");
 
@@ -189,7 +192,8 @@ namespace easy2d
 
         const int fps = 60;
 
-        SDL_Texture *logoTexture = _loader.loadTexture("logo", "easy2d/resources/logo.png");
+        _loader.loadTexture("logo", "easy2d/resources/logo.png");
+        SDL_Texture *logoTexture = _loader.getTexture("logo");
         SDL_SetTextureBlendMode(logoTexture, SDL_BLENDMODE_BLEND);
 
         Uint32 frameStart;

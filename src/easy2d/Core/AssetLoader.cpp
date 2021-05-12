@@ -20,14 +20,14 @@ namespace easy2d
         }
     };
 
-    SDL_Texture *AssetsLoader::loadTexture(string id, const char *path)
+    bool AssetsLoader::loadTexture(string id, const char *path)
     {
         DEBUG("Loading {}: {}", id, path);
         SDL_Surface *surface = IMG_Load(path);
-        SDL_Texture *texture = SDL_CreateTextureFromSurface(getEngine().renderer(), surface);
+        SDL_Texture *texture = SDL_CreateTextureFromSurface(&getEngine().renderer(), surface);
         _surfaces.emplace(id, surface);
         _textures.emplace(id, texture);
-        return texture;
+        return texture != nullptr;
     }
 
 } // -- easy2d

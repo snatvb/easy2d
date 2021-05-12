@@ -58,7 +58,6 @@ add_subdirectory(${DEPS_DIRNAME}/entt ${CMAKE_CURRENT_BINARY_DIR}/entt)
 target_link_libraries(${ENGINE_NAME} PUBLIC EnTT)
 
 add_subdirectory(${DEPS_DIRNAME}/spdlog ${CMAKE_CURRENT_BINARY_DIR}/spdlog)
-# message("LOOKHERE ->" ${CMAKE_CURRENT_SOURCE_DIR}/${DEPS_DIRNAME}/spdlog/include)
 target_include_directories(${ENGINE_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/${DEPS_DIRNAME}/spdlog/include)
 target_link_libraries(${ENGINE_NAME} PRIVATE spdlog)
 

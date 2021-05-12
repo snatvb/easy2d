@@ -14,7 +14,7 @@ namespace easy2d
         AssetsLoader() = default;
         ~AssetsLoader();
 
-        SDL_Texture *loadTexture(string id, const char *path);
+        bool loadTexture(string id, const char *path);
         SDL_Texture *getTexture(string id) { return _textures[id]; }
 
     private:
