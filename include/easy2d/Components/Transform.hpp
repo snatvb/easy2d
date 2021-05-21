@@ -7,7 +7,7 @@ namespace easy2d
     {
         vec2df position;
         vec2df scale = {1.0f, 1.0f};
-        float rotation;
+        float rotation = 0.0f;
         bool isStatic = false;
 
         Transform() = default;

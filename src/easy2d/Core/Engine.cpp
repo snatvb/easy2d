@@ -1,5 +1,6 @@
 #include <string>
 #include <filesystem>
+#include <SDL.h>
 #include <SDL_image.h>
 #include <entt/entt.hpp>
 #include <easy2d/Core/Engine.hpp>
@@ -115,6 +116,7 @@ namespace easy2d
 
         Uint32 frameStart = SDL_GetTicks();
         int frameTime = 0;
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
 
         while (true)
         {

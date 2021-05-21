@@ -34,16 +34,8 @@ namespace easy2d
                     }
                 }
 
-                if (transform.rotation != 0)
-                {
-                    SDL_RenderCopyEx(&renderer, texture, &src, &dst, transform.rotation, NULL, SDL_FLIP_NONE);
-                }
-                else
-                {
-                    SDL_RenderCopy(&renderer, texture, &src, &dst);
-                }
+                SDL_RenderCopyEx(&renderer, texture, &src, &dst, transform.rotation, NULL, SDL_FLIP_NONE);
             }
         }
-        SDL_RenderPresent(&renderer);
     }
 } // -- easy2d

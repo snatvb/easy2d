@@ -1,4 +1,3 @@
-#pragma once
 #include <easy2d/Core/World.hpp>
 #include <easy2d/Core/System.hpp>
 
