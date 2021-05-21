@@ -28,6 +28,11 @@ file(GLOB RENDERER_SRC
     include/${ENGINE_NAME}/Renderer/*.hpp
 )
 
+file(GLOB COMPONENTS_SRC
+    src/${ENGINE_NAME}/Components/*.cpp
+    include/${ENGINE_NAME}/Components/*.hpp
+)
+
 file(GLOB OWN_LIB_SRC
     src/${ENGINE_NAME}/lib/*.cpp
     include/${ENGINE_NAME}/lib/*.hpp
@@ -40,6 +45,7 @@ file(GLOB EXTERNALS_SRC
 
 add_library(${ENGINE_NAME} STATIC
     ${EXTERNALS_SRC}
+    ${COMPONENTS_SRC}
     ${CORE_SRC}
     ${RENDERER_SRC}
     ${DEBUG_SRC}

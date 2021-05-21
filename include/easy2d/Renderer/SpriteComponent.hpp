@@ -7,12 +7,7 @@ namespace easy2d
     struct SpriteComponent
     {
         string assetId;
-        vec2di offset;
         vec2di size;
-    };
-
-    struct ASDComponent
-    {
-        float x;
+        vec2di offset;
     };
 } // -- easy2d
