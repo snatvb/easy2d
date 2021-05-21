@@ -10,3 +10,6 @@
 [submodule "external/sole"]
 	path = external/sole
 	url = git@github.com:r-lyeh-archived/sole.git
+[submodule "external/spdlog"]
+	path = external/spdlog
+	url = git@github.com:gabime/spdlog.git
