@@ -12,12 +12,11 @@ namespace easy2d
         for (auto &[_, surface] : _surfaces)
         {
             SDL_FreeSurface(surface);
-            delete surface;
         }
 
         for (auto &[_, texture] : _textures)
         {
-            delete texture;
+            SDL_DestroyTexture(texture);
         }
     };
 
@@ -32,6 +31,8 @@ namespace easy2d
             WARN(err);
             return false;
         }
+        _surfaces.emplace(id, surface);
+
         SDL_Texture *texture = SDL_CreateTextureFromSurface(&getEngine().renderer(), surface);
         if (!texture)
         {
@@ -40,7 +41,6 @@ namespace easy2d
             WARN(err);
             return false;
         }
-        _surfaces.emplace(id, surface);
         _textures.emplace(id, texture);
         return texture != nullptr;
     }

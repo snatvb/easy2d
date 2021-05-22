@@ -9,5 +9,6 @@ namespace easy2d
         string assetId;
         vec2di size;
         vec2di offset;
+        uint8_t layer = 0;
     };
 } // -- easy2d

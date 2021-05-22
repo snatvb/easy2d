@@ -222,7 +222,7 @@ namespace easy2d
 
             SDL_SetTextureAlphaMod(logoTexture, alpha);
 
-            SDL_Rect offset = {0, 0, 400, 101};
+            SDL_Rect offset = {0, 0, 312, 101};
             SDL_Rect dest = {800 / 2 - 400 / 2, 600 / 2 - 100 / 2, 400, 100};
             SDL_RenderCopy(_renderer, logoTexture, &offset, &dest);
             SDL_RenderPresent(_renderer);

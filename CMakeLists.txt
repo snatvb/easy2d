@@ -16,6 +16,9 @@ set(DEPS_DIRNAME external)
 file(GLOB CORE_SRC
     src/${ENGINE_NAME}/Core/*.cpp
     include/${ENGINE_NAME}/Core/*.hpp
+
+    src/${ENGINE_NAME}/Core/Systems/*.cpp
+    include/${ENGINE_NAME}/Core/Systems/*.hpp
 )
 
 file(GLOB DEBUG_SRC

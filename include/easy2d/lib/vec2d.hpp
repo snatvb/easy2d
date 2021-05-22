@@ -21,26 +21,41 @@ namespace easy2d
             return *this;
         }
 
-        vec2d operator+(vec2d &v)
+        vec2d operator+(const vec2d &v)
         {
             return vec2d(x + v.x, y + v.y);
         }
-        vec2d operator-(vec2d &v)
+
+        vec2d operator-(const vec2d &v)
         {
             return vec2d(x - v.x, y - v.y);
         }
 
-        vec2d &operator+=(vec2d &v)
+        vec2d &operator+=(const vec2d &v)
         {
             x += v.x;
             y += v.y;
             return *this;
         }
 
-        vec2d &operator-=(vec2d &v)
+        vec2d &operator-=(const vec2d &v)
         {
             x -= v.x;
             y -= v.y;
+            return *this;
+        }
+
+        vec2d &operator*=(const vec2d &v)
+        {
+            x *= v.x;
+            y *= v.y;
+            return *this;
+        }
+
+        vec2d &operator/=(const vec2d &v)
+        {
+            x /= v.x;
+            y /= v.y;
             return *this;
         }
 
