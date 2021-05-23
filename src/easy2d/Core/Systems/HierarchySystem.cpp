@@ -25,11 +25,15 @@ namespace easy2d
       if (const auto *parentHierarchy = world->registry.try_get<Hierarchy>(hierarchy->parent))
       {
         transform.position = transform.position + parentTransform.local.position;
+        transform.rotation = transform.rotation + parentTransform.local.rotation;
+        transform.scale = transform.scale * parentTransform.local.scale;
         _applyTransformWithParents(transform, parentHierarchy);
       }
       else
       {
         transform.position = transform.position + parentTransform.local.position + parentTransform.position;
+        transform.scale = transform.scale * parentTransform.local.scale * parentTransform.scale;
+        transform.rotation = transform.rotation + parentTransform.local.rotation + parentTransform.rotation;
       }
     }
   }

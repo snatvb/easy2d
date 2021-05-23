@@ -31,6 +31,16 @@ namespace easy2d
             return vec2d(x - v.x, y - v.y);
         }
 
+        vec2d operator*(const vec2d &v)
+        {
+            return vec2d(x * v.x, y * v.y);
+        }
+
+        vec2d operator/(const vec2d &v)
+        {
+            return vec2d(x / v.x, y / v.y);
+        }
+
         vec2d &operator+=(const vec2d &v)
         {
             x += v.x;
@@ -63,14 +73,17 @@ namespace easy2d
         {
             return vec2d(x + s, y + s);
         }
+
         vec2d operator-(double s)
         {
             return vec2d(x - s, y - s);
         }
+
         vec2d operator*(double s)
         {
             return vec2d(x * s, y * s);
         }
+
         vec2d operator/(double s)
         {
             return vec2d(x / s, y / s);
