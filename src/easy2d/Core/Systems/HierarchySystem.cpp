@@ -11,6 +11,8 @@ namespace easy2d
     for (auto [entity, transform, hierarchy] : view.each())
     {
       transform.position *= 0;
+      transform.rotation = 0;
+      transform.scale.set(1.0f, 1.0f);
       _applyTransformWithParents(transform, &hierarchy);
     }
   }
