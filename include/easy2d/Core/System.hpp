@@ -9,6 +9,7 @@ namespace easy2d
         World *world = nullptr;
 
         BaseSystem() = default;
+        virtual ~BaseSystem() = default;
         virtual void initialize() {}
         virtual void execute() = 0;
     };
@@ -16,7 +17,5 @@ namespace easy2d
     template <typename Impl>
     class System : public BaseSystem
     {
-    public:
-        System() = default;
     };
 } // -- easy2d
