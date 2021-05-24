@@ -8,6 +8,7 @@
 #include <easy2d/Core/World.hpp>
 #include <easy2d/Core/System.hpp>
 #include <easy2d/Core/AssetsLoader.hpp>
+#include <chrono>
 
 namespace fs = std::filesystem;
 
@@ -117,6 +118,7 @@ namespace easy2d
         Uint32 frameStart = SDL_GetTicks();
         int frameTime = 0;
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, 0);
+        auto lastTime = std::chrono::high_resolution_clock::now();
 
         while (true)
         {
@@ -139,6 +141,11 @@ namespace easy2d
             SDL_RenderPresent(_renderer);
 
             frameTime = SDL_GetTicks() - frameStart;
+
+            // _deltaTime = (float)frameTime / 1000.0f;
+            auto now = std::chrono::high_resolution_clock::now();
+            _deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(now - lastTime).count() / 1000.0f;
+            lastTime = now;
 
             if (_frameDelay > frameTime)
             {

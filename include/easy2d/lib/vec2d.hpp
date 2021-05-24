@@ -117,6 +117,11 @@ namespace easy2d
             return *this;
         }
 
+        T area()
+        {
+            return x * y;
+        }
+
         void set(T x, T y)
         {
             this->x = x;

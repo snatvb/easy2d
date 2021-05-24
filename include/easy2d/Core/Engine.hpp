@@ -33,15 +33,25 @@ namespace easy2d
         Engine &skipIntro();
         Engine &setActiveWorld(const UUID &uuid);
         Engine &run();
+        Engine &setLayersCount(size_t layersCount)
+        {
+            _layersCount = layersCount;
+            return *this;
+        }
 
         SDL_Window *window() { return _window; }
         SDL_Renderer &renderer() { return *_renderer; }
         AssetsLoader &loader() { return _loader; }
+        size_t layersCount() const { return _layersCount; }
+        float deltaTime() const { return _deltaTime; }
 
     private:
+        size_t _layersCount = 32;
         // needs dynamic for fps controll
         int _frameRate = 300;
         int _frameDelay = 1000 / 300;
+
+        float _deltaTime = 0;
 
         SDL_Window *_window = nullptr;
         SDL_Renderer *_renderer = nullptr;
