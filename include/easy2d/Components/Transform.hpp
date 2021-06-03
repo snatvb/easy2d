@@ -1,5 +1,6 @@
 #pragma once
 #include <easy2d/lib/vec2d.hpp>
+#include <easy2d/lib/matrix.hpp>
 
 namespace easy2d
 {
@@ -11,6 +12,13 @@ namespace easy2d
 
         TransformRaw() = default;
         TransformRaw(vec2df position) : position(position) {}
+
+    private:
+        matrix _matrix{(float[]){1, 0, 0,
+                                 0, 1, 0,
+                                 0, 0, 1},
+                       3,
+                       3};
     };
 
     struct Transform : public TransformRaw
